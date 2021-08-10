@@ -14,7 +14,6 @@ ActiveStorage.start()
 
 
 document.addEventListener('turbolinks:load', () => {
-
   let alertsList = [].slice.call(document.querySelectorAll('.alert-dismissible'))
   let closeAlerts = alertsList.map((alert) => {
     let dismissButton = document.createElement('button')
