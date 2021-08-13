@@ -8,7 +8,9 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1 or /events/1.json
-  def show; end
+  def show
+    # redirect_to root_path
+  end
 
   # GET /events/new
   def new

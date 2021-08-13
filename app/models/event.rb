@@ -1,3 +1,14 @@
 class Event < ApplicationRecord
+  # Creator Assocation
   belongs_to :creator, class_name: "User"
+
+  # Attendee Assocation
+  has_many :event_attendees, foreign_key: "attended_event_id"
+  has_many :attendees, through: :event_attendees
+
+  # Validations
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :location, presence: true
+  validates :date, presence: true
 end
