@@ -8,6 +8,7 @@
     <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
     <%= stylesheet_pack_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
+    <%= stylesheet_link_tag "https://use.fontawesome.com/releases/v5.15.1/css/all.css", integrity: "sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp", crossorigin: "anonymous" %>
   </head>
   <body>
     <% flash.each do |type, msg| %>
@@ -49,7 +50,7 @@
     </nav>
     <div class="container">
       <div class="row">
-        <div class="col-8 m-auto">
+        <div class="col-10 m-auto">
           <%= yield %>
         </div>
       </div>
