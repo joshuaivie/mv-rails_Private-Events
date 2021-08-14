@@ -16,7 +16,7 @@
         <%= msg %>
       </div>
     <% end %>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 position-fixed w-100" style="z-index: 100">
       <div class="container">
         <%= link_to root_path, class: "navbar-brand fw-bold" do %>
           Private Events
@@ -48,8 +48,8 @@
         </div>
       </div>
     </nav>
-    <div class="container">
-      <div class="row">
+    <div class="container pt-5">
+      <div class="row pt-5">
         <div class="col-10 m-auto">
           <%= yield %>
         </div>

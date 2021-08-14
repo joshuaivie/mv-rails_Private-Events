@@ -6,6 +6,10 @@ class Event < ApplicationRecord
   has_many :event_attendees, foreign_key: "attended_event_id"
   has_many :attendees, through: :event_attendees
 
+  # Scopes
+  scope :upcoming_events, -> { where("Date >= ?", Date.today).order("Date ASC") }
+  scope :past_events, -> { where("Date <  ?", Date.today).order("Date DESC") }
+
   # Validations
   validates :title, presence: true
   validates :description, presence: true
