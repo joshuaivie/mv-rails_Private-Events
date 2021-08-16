@@ -1,5 +1,5 @@
 module EventsHelper
-  def show_events(events)
+  def show_events(events, event_state)
     out = ""
     events.each do |event|
       out += "<li class='event-list-item'>"
@@ -26,8 +26,14 @@ module EventsHelper
       out += "#{event.description}"
       out += "</div>"
       out += "<div class='event-buttons'>"
-      out += "#{link_to "Attend Event", attend_event_path(id: event.id), method: :post, class: "btn btn-sm btn-primary more-info me-2"}"
-      out += "#{link_to "Ignore Event", ignore_event_path(id: event.id), method: :delete, data: { message: "Are you sure you want to miss this event?" }, class: "btn btn-sm btn-primary more-info me-2"}"
+      if event_state.downcase == "upcoming_events"
+        if current_user.attending_event?(event)
+          out += "#{link_to "Ignore Event", ignore_event_path(id: event.id), method: :delete, data: { message: "Are you sure you want to miss this event?" }, class: "btn btn-sm btn-danger more-info me-2"}"
+        else
+          out += "#{link_to "Attend Event", attend_event_path(id: event.id), method: :post, class: "btn btn-sm btn-success more-info me-2"}"
+        end
+      end
+      out += "#{link_to "More Information", event, class: "btn btn-sm btn-primary more-info me-2"}"
       out += "</div>"
       out += "</div>"
       out += "</li>"

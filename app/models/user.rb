@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :username, length: { maximum: 20, minimum: 5 }, uniqueness: { case_sensitive: false }
 
   # Class Methods
-  def attending?(event)
+  def attending_event?(event)
     event.attendees.include?(self)
   end
 
