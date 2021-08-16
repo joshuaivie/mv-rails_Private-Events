@@ -20,7 +20,7 @@ class User < ApplicationRecord
     event_attendees.create!(attended_event_id: event.id)
   end
 
-  def unattend_event(event)
+  def ignore_event(event)
     event_attendees.find_by(attended_event_id: event.id).destroy
   end
 end

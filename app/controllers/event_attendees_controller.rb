@@ -1,13 +1,13 @@
 class EventAttendeesController < ApplicationController
-  def create
-    @event = Event.find(params[:event_attendee][:attended_event_id])
+  def attend
+    @event = Event.find_by_id(params[:id])
     current_user.attend_event(@event)
-    redirect_to @event
+    redirect_to @event, notice: "Your attendance for the event has been captured."
   end
 
-  def destroy
-    @event = EventAttendee.find(params[:id]).attended_event
-    current_user.unattend_event(@event)
-    redirect_to @event
+  def ignore
+    @event = Event.find_by_id(params[:id])
+    current_user.ignore_event(@event)
+    redirect_to root_path, alert: "Your attendance for the event has been removed."
   end
 end
