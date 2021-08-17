@@ -28,7 +28,7 @@
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <% if user_signed_in? %>
               <li class="nav-item">
-                <%= link_to current_user.fullname, edit_user_registration_path, class: 'btn' %>
+                <%= link_to current_user.fullname, user_path(current_user), class: 'btn' %>
               </li>
               <li class="nav-item">
                 <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'btn' %>

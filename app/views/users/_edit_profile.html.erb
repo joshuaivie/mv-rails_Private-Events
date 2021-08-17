@@ -1,0 +1,14 @@
+<%= simple_form_for(@user, url: registration_path(@user), html: { method: :put }) do |f| %>
+  <%= f.error_notification class: 'alert-dismissible fade show mb-0', role: 'alert' %>
+  <%= f.input :fullname, label: 'Full Name', required: true, autofocus: true, input_html: { autocomplete: "full-name", class: 'form-control' }, wrapper_html: { class: 'mb-3 position-relative' }, hint_html: { class: 'form-hint' }, disabled: true, hint: 'You cannot change your name.' %>
+  <%= f.input :username, label: 'User Name', required: true, autofocus: true, input_html: { autocomplete: "username", class: 'form-control' }, wrapper_html: { class: 'mb-3 position-relative' }, hint_html: { class: 'form-hint' } %>
+  <%= f.input :email, label: 'Email Address', required: true, autofocus: true, input_html: { autocomplete: "email", class: 'form-control' }, wrapper_html: { class: 'mb-3 position-relative' }, hint_html: { class: 'form-hint' }, disabled: true, hint: 'You cannot change your email' %>
+  <%= f.input :password, label: 'Password', required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password", class: 'form-control' }, wrapper_html: { class: 'mb-3 position-relative' }, hint_html: { class: 'form-hint' }, hint: "leave it blank if you don't want to change it" %>
+  <%= f.input :password_confirmation, label: 'Confirm Password', required: true, input_html: { autocomplete: "new-password", class: 'form-control' }, wrapper_html: { class: 'mb-3 position-relative' },  hint_html: { class: 'form-hint' } %>
+  <%= f.input :current_password, label: 'Current Password', required: true, input_html: { autocomplete: "current-password", class: 'form-control' }, wrapper_html: { class: 'mb-3 position-relative' },  hint_html: { class: 'form-hint' }, hint: "we need your current password to confirm your changes" %>
+  <%= f.button :submit, "Update Account", class: 'w-100 btn btn-primary' %>
+<% end %>
+<div class="form-actions d-flex flex-column mt-3">
+  <h6>Cancel my account</h6>
+  <p>Unhappy? <%= link_to "Cancel my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete %></p>
+</div>

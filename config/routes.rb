@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :users, only: [:show]
   devise_for :users
+  resources :users, only: [:show]
   resources :events
 
   post "attend_event/", to: "event_attendees#attend", as: :attend_event
