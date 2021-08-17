@@ -40,7 +40,7 @@ module EventsHelper
       out += "#{event.description}"
       out += "</div>"
       out += "<div class='event-buttons'>"
-      if options[:event_state].downcase == "upcoming_event" && user_signed_in? && current_user.id != event.creator.id
+      if (options[:event_state].downcase == "upcoming_event" || options[:display_type] == "single") && user_signed_in? && current_user.id != event.creator.id
         if current_user.attending_event?(event)
           out += "#{link_to "Ignore", ignore_event_path(id: event.id), method: :delete, data: { message: "Are you sure you want to miss this event?" }, class: "btn btn-sm btn-danger more-info me-2"}"
         else
@@ -56,7 +56,12 @@ module EventsHelper
       end
       out += "</div>"
       out += "</div>"
-      out += "</@li>"
+      out += "<"
+      if options[:display_type] == "single"
+        out += "/div>"
+      else
+        out += "/li>"
+      end
     end
     out.html_safe
   end

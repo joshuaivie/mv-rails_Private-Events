@@ -7,7 +7,7 @@
 </div>
 <div class="mt-5 mb-4 text-center">
   <h4 class="fw-bold">Event Attendees</h4>
-  <p class="fw-normal text-warning bg-dark p-2 d-inline-block rounded"><%= @event.attendees.count%><%= @event.attendees.count > 1 ? ' people' : ' person'%> will be atteding this event</p>
+  <p class="fw-normal text-warning bg-dark p-2 d-inline-block rounded"><%= @event.attendees.count%><%= @event.attendees.count == 1 ? ' person' : ' people'%> will be atteding this event</p>
 </div>
 <div class="row">
   <% @event.attendees.each do |attendee| %>

@@ -45,7 +45,7 @@ pre {
 }
 
 .alert {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   z-index: 100;
   width: 75%;
@@ -86,6 +86,10 @@ abbr[title] {
   &.list {
     border-bottom: 2px solid #e6e6e6;
     padding: 40px 0;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
   }
 
   &:first-of-type {
