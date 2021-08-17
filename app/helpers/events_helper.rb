@@ -1,8 +1,22 @@
 module EventsHelper
-  def show_events(events, event_state)
+  def show_events(events, options)
     out = ""
     events.each do |event|
-      out += "<li class='event-list-item'>"
+      out += "<"
+      if options[:display_type] == "single"
+        out += "div"
+      else
+        out += "li"
+      end
+      out += " class='event-item"
+
+      if options[:display_type] == "list"
+        out += " list"
+        if options[:event_state].downcase == "past_event"
+          out += " greyscale-event"
+        end
+      end
+      out += "'>"
       out += "<div class='event-date-container'>"
       out += "<div class='event-date'>"
       out += "<div class='event-month'>"
@@ -26,17 +40,23 @@ module EventsHelper
       out += "#{event.description}"
       out += "</div>"
       out += "<div class='event-buttons'>"
-      if event_state.downcase == "upcoming_events"
+      if options[:event_state].downcase == "upcoming_event" && user_signed_in? && current_user.id != event.creator.id
         if current_user.attending_event?(event)
-          out += "#{link_to "Ignore Event", ignore_event_path(id: event.id), method: :delete, data: { message: "Are you sure you want to miss this event?" }, class: "btn btn-sm btn-danger more-info me-2"}"
+          out += "#{link_to "Ignore", ignore_event_path(id: event.id), method: :delete, data: { message: "Are you sure you want to miss this event?" }, class: "btn btn-sm btn-danger more-info me-2"}"
         else
-          out += "#{link_to "Attend Event", attend_event_path(id: event.id), method: :post, class: "btn btn-sm btn-success more-info me-2"}"
+          out += "#{link_to "Attend", attend_event_path(id: event.id), method: :post, class: "btn btn-sm btn-success more-info me-2"}"
         end
       end
-      out += "#{link_to "More Information", event, class: "btn btn-sm btn-primary more-info me-2"}"
+      if user_signed_in? && current_user.id == event.creator.id && event.date > Date.today
+        out += "#{link_to "Edit", edit_event_path(event), class: "btn btn-sm btn-primary more-info me-2"}"
+        out += "#{link_to "Cancel", event_path(event), data: { message: "Are you sure you want to cancel this event?" }, method: :delete, class: "btn btn-sm btn-danger more-info me-2"}"
+      end
+      if options[:display_type] == "list"
+        out += "#{link_to "View", event, class: "btn btn-sm btn-primary more-info me-2"}"
+      end
       out += "</div>"
       out += "</div>"
-      out += "</li>"
+      out += "</@li>"
     end
     out.html_safe
   end

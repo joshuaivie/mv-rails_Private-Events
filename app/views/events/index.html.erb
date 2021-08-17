@@ -9,12 +9,12 @@
   <div class="tab-content" id="events_tabContent">
     <div class="tab-pane fade show active" id="upcoming_events" role="tabpanel" aria-labelledby="upcoming-events">
       <ul class="events-container">
-        <%= show_events(@upcoming_events, 'upcoming_events')%>
+        <%= show_events(@upcoming_events, {:event_state => "upcoming_event", :display_type => "list"})%>
       </ul>
     </div>
     <div class="tab-pane fade" id="past_events" role="tabpanel" aria-labelledby="past-events">
       <ul class="events-container">
-        <%= show_events(@past_events, 'past_events')%>
+        <%= show_events(@past_events, {:event_state => "past_event", :display_type => "list"})%>
       </ul>
     </div>
   </div>

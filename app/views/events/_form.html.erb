@@ -1,16 +1,13 @@
-
 <%= simple_form_for(@event) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :description %>
-    <%= f.input :location %>
-    <%= f.input :date %>
+  <div class="form-inputs mb-4">
+    <%= f.error_notification class: 'alert-dismissible fade show mb-0', role: 'alert'%>
+    <%= f.input :title, label: 'Title', label_html: { class: 'mb-2' }, required: true, autofocus: true, input_html: { autocomplete: "event-title", class: 'form-control'}, wrapper_html: { class: 'mb-3 position-relative' }, hint_html: { class: 'form-hint' }  %>
+    <%= f.input :description, label: 'Description', label_html: { class: 'mb-2' }, required: true, autofocus: true, input_html: { autocomplete: "description", class: 'form-control' }, wrapper_html: { class: 'mb-3 position-relative' }, hint_html: { class: 'form-hint' } %>
+    <%= f.input :location, label: 'Location', label_html: { class: 'mb-2' }, required: true, autofocus: true, input_html: { autocomplete: "location", class: 'form-control' }, wrapper_html: { class: 'mb-3 position-relative' }, hint_html: { class: 'form-hint' } %>
+    <%= f.input :date, label: 'Date', label_html: { class: 'mb-2' }, required: true, input_html: { autocomplete: "date", class: 'form-control' }, wrapper_html: { class: 'mb-3 position-relative' },  hint_html: { class: 'form-hint' } %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-actions d-flex mt-4">
+    <%= f.button :submit, class: 'btn btn-primary w-100 me-2'%>
+    <%= link_to 'Cancel', events_path, class: 'btn btn-danger w-100 ms-2'  %>
   </div>
 <% end %>
