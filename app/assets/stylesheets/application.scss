@@ -21,7 +21,6 @@ body {
   background-color: #fff;
 }
 
-
 body,
 p,
 ol,
@@ -154,6 +153,8 @@ abbr[title] {
   background: #fff;
   box-shadow: 0 0px 10px rgba(0, 0, 0, .1);
   border-radius: 10px;
+  color: #333;
+  text-decoration: none;
   transition: 0.5s;
   text-align: center;
   padding: 40px;

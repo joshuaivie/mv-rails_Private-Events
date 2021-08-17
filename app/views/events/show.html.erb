@@ -12,18 +12,20 @@
 <div class="row">
   <% @event.attendees.each do |attendee| %>
     <div class="col-4">
-      <div class="card hover">
-        <div class="box">
-          <div class="img mb-2">
-            <img src="https://avatars.dicebear.com/api/micah/<%= attendee.username %>.svg" alt="<%= attendee.fullname %>" />
-          </div>
-          <h5 class="fw-bold mb-0"><%= attendee.fullname %></h5>
-          <div class="d-flex flex-column text-center justify-content-center align-content-center">
-            <span class="d-block mb-2 subtitle"><%= @event.creator.id == attendee.id ? 'Event Organizer' : 'Attendee'  %></span>
-            <span class="d-block mb-2">@<%= attendee.username %></span>
+      <%= link_to user_path(attendee) do %>
+        <div class="card hover">
+          <div class="box">
+            <div class="img mb-2">
+              <img src="https://avatars.dicebear.com/api/micah/<%= attendee.username %>.svg" alt="<%= attendee.fullname %>" />
+            </div>
+            <h5 class="fw-bold mb-0"><%= attendee.fullname %></h5>
+            <div class="d-flex flex-column text-center justify-content-center align-content-center">
+              <span class="d-block mb-2 subtitle"><%= @event.creator.id == attendee.id ? 'Event Organizer' : 'Attendee'  %></span>
+              <span class="d-block mb-2">@<%= attendee.username %></span>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
     </div>
   <%end%>
 </div>
