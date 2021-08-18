@@ -1,0 +1,4 @@
+<% if @user.attended_events.where("Date < ?", Time.now).count > 0 %>
+  <%= show_events(@user.attended_events.where("Date < ?", Time.now), {:event_state => "past_event", :display_type => "list"})%>
+<% else %>
+<% end %>
