@@ -1,9 +1,9 @@
 class EventAttendee < ApplicationRecord
   # Attendee Assocation
-  belongs_to :attendee, class_name: "User"
+  belongs_to :attendee, class_name: 'User'
 
   # Attended Event Assocation
-  belongs_to :attended_event, class_name: "Event"
+  belongs_to :attended_event, class_name: 'Event'
 
   # Validations
   validates :attendee_id, presence: true
