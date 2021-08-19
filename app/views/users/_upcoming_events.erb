@@ -1,4 +1,7 @@
 <% if @user.attended_events.where("Date >= ?", Time.now).count > 0 %>
-  <%= show_events(@user.attended_events.where("Date >= ?", Time.now), {:event_state => "upcoming_event", :display_type => "list"})%>
+  <%= show_events(@user.attended_events.where("Date >= ?", Time.now), {:event_state => "upcoming_event", :display_type => "list", :profle => true })%>
 <% else %>
+  <div class="py-5">
+    <%= render 'shared/no_event' %>
+  </div>
 <% end %>
