@@ -1,0 +1,59 @@
+<% events.each do |event| %>
+  <% if display_type == 'single' %>
+    <div class='event-item <%= ' greyscale-event' if event_state.downcase == 'past_event' %>'>
+    <% else %>
+      <li class='event-item list <%= ' greyscale-event' if event_state.downcase == 'past_event' %>'>
+      <% end %>
+      <div class='event-date-container'>
+        <div class='event-date'>
+          <div class='event-month'>
+            <%= event.date.strftime('%b').to_s %>
+          </div>
+          <div class='event-day'>
+            <%= event.date.strftime('%-d').to_s %>
+          </div>
+        </div>
+      </div>
+      <div class='event-content'>
+        <div class='event-title mb-3 <%= ' smaller-text' if  profile %>'>
+          <%= event.title.to_s %>
+        </div>
+        <div class='event-details d-flex flex-wrap'>
+          <div class='event-location me-3 mb-2'>
+            <i class='fas fa-location-arrow fa-fw'></i>
+            <%= event.location%>
+          </div>
+          <div class='event-time me-3 mb-2'>
+            <i class='fas fa-clock fa-fw'></i>
+            <%=event.date.strftime('%A %l:%M %p') %>
+          </div>
+          <div class='event-organizer me-3 mb-2'>
+            <i class='fas fa-user-circle fa-fw'></i>
+            Oraganizer: <%= event.creator.fullname%>
+          </div>
+        </div>
+        <div class='event-description'>
+          <%=  event.description.to_s %>
+        </div>
+        <div class='event-buttons'>
+          <% if user_signed_in? && event.date > Time.now %>
+            <% if current_user.id == event.creator.id %>
+              <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-sm btn-primary more-info me-2'.to_s %>
+              <%= link_to 'Cancel', event_path(event), data: { message: 'Are you sure you want to cancel this event?' }, method: :delete, class: 'btn btn-sm btn-danger more-info me-2'.to_s %>
+            <% else %>
+              <% if current_user.attending_event?(event) %>
+                <%= link_to 'Ignore', ignore_event_path(id: event.id), method: :delete, data: { message: 'Are you sure you want to miss this event?' }, class: 'btn btn-sm btn-danger more-info me-2'.to_s %>
+              <% else %>
+                <%=  link_to 'Attend', attend_event_path(id: event.id), method: :post, class: 'btn btn-sm btn-success more-info me-2'.to_s %>
+              <% end %>
+            <% end %>
+            <%= link_to 'View', event, class: 'btn btn-sm btn-primary more-info me-2'.to_s if display_type == 'list'%>
+          <% end %>
+        </div>
+      </div>
+      <% if display_type == 'single' %>
+      </div>
+    <% else %>
+    </li>
+  <% end %>
+<% end %>
